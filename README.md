@@ -1,38 +1,86 @@
-Role Name
-=========
+Ansible Role: Unison
+====================
 
-A brief description of the role goes here.
+Role to install and configure the Unison file synchromizer for a Vagrant managed guest VM
+[https://www.cis.upenn.edu/~bcpierce/unison](https://www.cis.upenn.edu/~bcpierce/unison).
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* Ubuntu
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables will change the behavior of this role (default values
+are shown below):
 
-Dependencies
-------------
+```yaml
+# Files to be synchronized
+unison_include_files: []
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+# Directories to be synchronized
+unison_include_directories: []
+
+# Paths not to synchronize (in the include dirrectories)
+unison_ignore_paths: []
+```
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.unison
+      unison_include_directories:
+        - .ssh
+        - .gnupg
+        - .m2
+        - workspace
+      unison_include_files:
+        - .bash_history
+        - .zsh_history
+        - .gitconfig
+      unison_ignore_paths:
+        - Path .ssh/authorized_keys
+        - BelowPath .m2/repository
+        - Name target
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Vagrant configuration
+---------------------
+
+You need to install the `vagrant-triggers` vagrant plugin and add the following
+to your `Vagrantfile`.
+
+```ruby
+  # Ensure Unison service isn't started until Vagrant shared folders are mounted
+  # and stopped before shared folders are unmounted (if we don't Unison will
+  # assume all files have been deleted and cascade the delete to the client VM).
+  config.trigger.after :up do
+    run_remote "sudo systemctl start unison"
+  end
+  config.trigger.after :reload do
+    run_remote "sudo systemctl start unison"
+  end
+  config.trigger.before :halt do
+    run_remote "sudo systemctl stop unison"
+  end
+  config.trigger.before :reload do
+    run_remote "sudo systemctl stop unison"
+  end
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+John Freeman
+
+GantSign Ltd.
+Company No. 06109112 (registered in England)
