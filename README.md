@@ -1,6 +1,8 @@
 Ansible Role: Unison
 ====================
 
+[![Build Status](https://travis-ci.org/gantsign/ansible-role-unison.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-unison)
+
 Role to install and configure the Unison file synchromizer for a Vagrant managed guest VM
 [https://www.cis.upenn.edu/~bcpierce/unison](https://www.cis.upenn.edu/~bcpierce/unison).
 
