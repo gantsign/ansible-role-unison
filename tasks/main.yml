@@ -19,6 +19,7 @@
     state: directory
     owner: vagrant
     group: vagrant
+    mode: 'u=rwx,go=rx'
 
 - name: write unison vagrant profile
   template:
@@ -26,6 +27,7 @@
     dest: /home/vagrant/.unison/vagrant.prf
     owner: vagrant
     group: vagrant
+    mode: 'u=rw,go=r'
 
 - name: sync missing files from host to client
   shell: >
@@ -50,6 +52,7 @@
     state: directory
     owner: vagrant
     group: vagrant
+    mode: 'u=rwx,go=rx'
   with_items: "{{ unison_include_directories }}"
 
 - name: create missing includeFiles
@@ -59,6 +62,7 @@
     force: no
     owner: vagrant
     group: vagrant
+    mode: 'u=rw,go=r'
   with_items: "{{ unison_include_files }}"
 
 - name: sync missing files from client to host
