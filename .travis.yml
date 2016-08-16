@@ -32,7 +32,7 @@ script:
   # Run the playbook with ansible-playbook
   # Docker doesn't suuport the init system so we skip the service registration
   # by adding --skip-tags init-system
-  - '$exec_dkr bash -c "cd /ansible/$repo_name && sudo ansible-playbook -i tests/inventory --skip-tags init-system tests/test.yml"'
+  - '$exec_dkr bash -c "cd /ansible/$repo_name && ansible-playbook -i tests/inventory --skip-tags init-system tests/test.yml"'
 
   # Check the unison
   - '$exec_dkr mkdir -p /home/vagrant/included/excluded'
