@@ -2,4 +2,10 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-role-unison
+    - role: ansible-role-unison
+      unison_include_directories:
+        - included
+      unison_include_files:
+        - includeme
+      unison_ignore_paths:
+        - Name excluded
