@@ -106,6 +106,9 @@
   become_method: sudo
   become_user: vagrant
 - name: add unison service to default run level and start
+  tags:
+    # Add init-system tag so we can skip this task when running in Docker 
+    - init-system
   # Since Vagrant shares are mounted/unmounted outside the systemd lifecycle
   # we can't auto-start/auto-stop the service using systemd.
   service:
