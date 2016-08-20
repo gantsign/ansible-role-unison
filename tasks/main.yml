@@ -13,7 +13,7 @@
 - name: write unison systemd configration
   become: yes
   template:
-    src: unison.service
+    src: unison.service.j2
     dest: /etc/systemd/system/unison.service
 
 - name: create vagrant .unison directory
@@ -28,7 +28,7 @@
 - name: write unison vagrant profile
   become: yes
   template:
-    src: vagrant.prf
+    src: vagrant.prf.j2
     dest: /home/vagrant/.unison/vagrant.prf
     owner: vagrant
     group: vagrant
