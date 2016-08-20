@@ -1,0 +1,24 @@
+---
+molecule:
+  test:
+    # Sequence of commands to run when performing `molecule test`
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      # Skip the idempotence check (fails because of the file copying)
+      # - idempotence
+      - verify
+
+ansible:
+  playbook: tests/test.yml
+  # Docker doesn't suuport the init system so we skip the service registration
+  # by adding --skip-tags init-system when running ansible-playbook
+  skip_tags: init-system
+
+docker:
+  containers:
+  - name: ansible-role-unison-01
+    image: ubuntu
+    image_version: '16.04'

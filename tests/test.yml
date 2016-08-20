@@ -1,6 +1,24 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
+
+  pre_tasks:
+    - name: create vagrant
+      become: yes
+      user:
+        name: vagrant
+        state: present
+        home: /home/vagrant
+        createhome: yes
+
+    - name: create vagrant shared directory
+      file:
+        path: /vagrant
+        state: directory
+        mode: 'u=rwx,go=rx'
+        owner: vagrant
+        group: vagrant
+
   roles:
     - role: ansible-role-unison
       unison_include_directories:
