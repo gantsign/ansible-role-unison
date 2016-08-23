@@ -54,6 +54,7 @@
     -logfile=/home/vagrant/.unison/init1.log
     &> /home/vagrant/.unison/init1.out
   register: command_result
+  changed_when: '"Nothing to do" not in command_result.stderr'
   failed_when: command_result.rc > 1
 
 - name: create missing includeDirectories
@@ -91,6 +92,7 @@
     -logfile=/home/vagrant/.unison/init2.log
     &> /home/vagrant/.unison/init2.out
   register: command_result
+  changed_when: '"Nothing to do" not in command_result.stderr'
   failed_when: command_result.rc > 1
 
 - name: sync file changes from host to client
@@ -106,6 +108,7 @@
     -logfile=/home/vagrant/.unison/init3.log
     &> /home/vagrant/.unison/init3.out
   register: command_result
+  changed_when: '"Nothing to do" not in command_result.stderr'
   failed_when: command_result.rc > 1
 
 - name: delete unison archives
@@ -116,6 +119,7 @@
     -regextype posix-extended
     -regex ".*/(ar|fp)[0-9a-f]{32}"
     -delete
+  changed_when: no
 
 - name: recreate unison archives
   become: yes
@@ -126,6 +130,7 @@
     -logfile=/home/vagrant/.unison/init4.log
     &> /home/vagrant/.unison/init4.out
   register: command_result
+  changed_when: '"Nothing to do" not in command_result.stderr'
   failed_when: command_result.rc > 1
 
 - name: add unison service to default run level and start
