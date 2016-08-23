@@ -1,16 +1,4 @@
 ---
-molecule:
-  test:
-    # Sequence of commands to run when performing `molecule test`
-    sequence:
-      - destroy
-      - syntax
-      - create
-      - converge
-      # Skip the idempotence check (fails because of the file copying)
-      # - idempotence
-      - verify
-
 ansible:
   playbook: tests/test.yml
   # Docker doesn't suuport the init system so we skip the service registration
