@@ -10,3 +10,6 @@ docker:
   - name: ansible-role-unison-01
     image: ubuntu
     image_version: '16.04'
+
+testinfra:
+  hosts: ansible-role-unison-01
