@@ -2,8 +2,8 @@
 
 # Unison preferences
 label = Mirror home directory
-root = /home/vagrant
-root = /vagrant/home
+root = {{ unison_src_root }}
+root = {{ unison_mirror_root }}
 
 # Paths to mirror
 {% for include_file in unison_include_files %}
@@ -19,8 +19,8 @@ ignore = {{ ignore_path }}
 {% endfor %}
 
 # Paths to protect
-nodeletionpartial = BelowPath .ssh -> /home/vagrant
-noupdatepartial = Path .ssh/authorized_keys -> /home/vagrant
+nodeletionpartial = BelowPath .ssh -> {{ unison_src_root }}
+noupdatepartial = Path .ssh/authorized_keys -> {{ unison_src_root }}
 
 # Make it work with limitations of Windows file system
 fat = true
