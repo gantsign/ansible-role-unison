@@ -25,7 +25,7 @@ unison_include_files: []
 # Directories to be synchronized
 unison_include_directories: []
 
-# Paths not to synchronize (in the include dirrectories)
+# Paths not to synchronize (in the include directories)
 unison_ignore_paths: []
 
 # Path to root directory of files to be mirrored
