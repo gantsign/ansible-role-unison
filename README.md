@@ -33,6 +33,9 @@ unison_src_root: '/home/vagrant'
 
 # Path to root directory of mirrored files
 unison_mirror_root: '/vagrant/home'
+
+# Make Unison work with the limitations of the Windows file system
+unison_fat: yes
 ```
 
 Example Playbook

@@ -23,7 +23,7 @@ nodeletionpartial = BelowPath .ssh -> {{ unison_src_root }}
 noupdatepartial = Path .ssh/authorized_keys -> {{ unison_src_root }}
 
 # Make it work with limitations of Windows file system
-fat = true
+fat={{ unison_fat | bool | ternary('true', 'false') }}
 
 # Don't ask for confirmation for non-conflicting files
 auto=true
