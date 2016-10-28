@@ -27,6 +27,12 @@ unison_include_directories: []
 
 # Paths not to synchronize (in the include dirrectories)
 unison_ignore_paths: []
+
+# Path to root directory of files to be mirrored
+unison_src_root: '/home/vagrant'
+
+# Path to root directory of mirrored files
+unison_mirror_root: '/vagrant/home'
 ```
 
 Example Playbook
