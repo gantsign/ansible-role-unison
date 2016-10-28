@@ -46,10 +46,10 @@
   shell: >
     /usr/bin/unison vagrant
     -dumbtty
-    -nodeletion=/home/vagrant
-    -noupdate=/home/vagrant
-    -prefer=/vagrant/home
-    -force=/vagrant/home
+    -nodeletion={{ unison_src_root }}
+    -noupdate={{ unison_src_root }}
+    -prefer={{ unison_mirror_root }}
+    -force={{ unison_mirror_root }}
     -ignorearchives
     -logfile=/home/vagrant/.unison/init1.log
     &> /home/vagrant/.unison/init1.out
@@ -60,7 +60,7 @@
 - name: create missing includeDirectories
   become: yes
   file:
-    path: "/home/vagrant/{{ item }}"
+    path: "{{ unison_src_root }}/{{ item }}"
     state: directory
     owner: vagrant
     group: vagrant
@@ -71,7 +71,7 @@
   become: yes
   copy:
     content: ''
-    dest: "/home/vagrant/{{ item }}"
+    dest: "{{ unison_src_root }}/{{ item }}"
     force: no
     owner: vagrant
     group: vagrant
@@ -84,10 +84,10 @@
   shell: >
     /usr/bin/unison vagrant
     -dumbtty
-    -nodeletion=/vagrant/home
-    -noupdate=/vagrant/home
-    -prefer=/home/vagrant
-    -force=/home/vagrant
+    -nodeletion={{ unison_mirror_root }}
+    -noupdate={{ unison_mirror_root }}
+    -prefer={{ unison_src_root }}
+    -force={{ unison_src_root }}
     -ignorearchives
     -logfile=/home/vagrant/.unison/init2.log
     &> /home/vagrant/.unison/init2.out
@@ -101,9 +101,9 @@
   shell: >
     /usr/bin/unison vagrant
     -dumbtty
-    -prefer=/vagrant/home
-    -force=/vagrant/home
-    -nodeletion=/home/vagrant
+    -prefer={{ unison_mirror_root }}
+    -force={{ unison_mirror_root }}
+    -nodeletion={{ unison_src_root }}
     -ignorearchives
     -logfile=/home/vagrant/.unison/init3.log
     &> /home/vagrant/.unison/init3.out
