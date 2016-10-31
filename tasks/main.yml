@@ -40,6 +40,15 @@
     group: vagrant
     mode: 'u=rw,go=r'
 
+- name: create mirror root directory
+  become: yes
+  file:
+    path: "{{ unison_mirror_root }}"
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 'u=rwx,go=rx'
+
 - name: sync missing files from host to client
   become: yes
   become_user: vagrant
