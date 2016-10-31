@@ -16,3 +16,6 @@ unison_mirror_root: '/vagrant/home'
 
 # Make Unison work with the limitations of the Windows file system
 unison_fat: yes
+
+# Whether the Unison service should auto-start on startup
+unison_service_auto_start: no

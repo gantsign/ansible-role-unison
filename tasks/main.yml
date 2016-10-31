@@ -147,9 +147,7 @@
   tags:
     # Add init-system tag so we can skip this task when running in Docker
     - init-system
-  # Since Vagrant shares are mounted/unmounted outside the systemd lifecycle
-  # we can't auto-start/auto-stop the service using systemd.
   service:
     name: unison
-    enabled: no
-    state: stopped
+    enabled: "{{ unison_service_auto_start }}"
+    state: "{{ unison_service_auto_start | ternary('started', 'stopped') }}"

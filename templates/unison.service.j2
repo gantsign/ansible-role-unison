@@ -2,7 +2,8 @@
 
 [Unit]
 Description=Unison file-synchronizer
-After=multi-user.target
+Requires=local-fs.target
+After=local-fs.target
 
 [Service]
 Environment="PATH=/usr/bin"
