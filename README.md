@@ -36,6 +36,9 @@ unison_mirror_root: '/vagrant/home'
 
 # Make Unison work with the limitations of the Windows file system
 unison_fat: yes
+
+# Whether the Unison service should auto-start on startup
+unison_service_auto_start: no
 ```
 
 Example Playbook
@@ -58,24 +61,6 @@ Example Playbook
         - Path .ssh/authorized_keys
         - BelowPath .m2/repository
         - Name target
-```
-
-Vagrant configuration
----------------------
-
-You need to install the `vagrant-triggers` vagrant plugin and add the following
-to your `Vagrantfile`.
-
-```ruby
-  # Ensure Unison service isn't started until Vagrant shared folders are mounted
-  # and stopped before shared folders are unmounted (if we don't Unison will
-  # assume all files have been deleted and cascade the delete to the client VM).
-  config.trigger.after [:up, :reload] do
-    run_remote 'bash -c "sudo systemctl start unison || true"'
-  end
-  config.trigger.before [:halt, :reload] do
-    run_remote 'bash -c "sudo systemctl stop unison || true"'
-  end
 ```
 
 More Roles From GantSign
