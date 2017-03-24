@@ -5,8 +5,17 @@ ansible:
   # by adding --skip-tags init-system when running ansible-playbook
   skip_tags: init-system
 
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
 docker:
   containers:
   - name: ansible-role-unison-01
     image: ubuntu
     image_version: '16.04'
+
+verifier:
+  name: testinfra
