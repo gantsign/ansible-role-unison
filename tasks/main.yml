@@ -43,7 +43,7 @@
 - name: create mirror root directory
   become: yes
   file:
-    path: "{{ unison_mirror_root }}"
+    path: '{{ unison_mirror_root }}'
     state: directory
     owner: vagrant
     group: vagrant
@@ -69,23 +69,23 @@
 - name: create missing includeDirectories
   become: yes
   file:
-    path: "{{ unison_src_root }}/{{ item }}"
+    path: '{{ unison_src_root }}/{{ item }}'
     state: directory
     owner: vagrant
     group: vagrant
     mode: 'u=rwx,go=rx'
-  with_items: "{{ unison_include_directories }}"
+  with_items: '{{ unison_include_directories }}'
 
 - name: create missing includeFiles
   become: yes
   copy:
     content: ''
-    dest: "{{ unison_src_root }}/{{ item }}"
+    dest: '{{ unison_src_root }}/{{ item }}'
     force: no
     owner: vagrant
     group: vagrant
     mode: 'u=rw,go=r'
-  with_items: "{{ unison_include_files }}"
+  with_items: '{{ unison_include_files }}'
 
 - name: sync missing files from client to host
   become: yes
@@ -126,7 +126,7 @@
     /usr/bin/find
     /home/vagrant/.unison
     -regextype posix-extended
-    -regex ".*/(ar|fp)[0-9a-f]{32}"
+    -regex '.*/(ar|fp)[0-9a-f]{32}'
     -delete
   changed_when: no
 
@@ -149,5 +149,5 @@
     - init-system
   service:
     name: unison
-    enabled: "{{ unison_service_auto_start }}"
+    enabled: '{{ unison_service_auto_start }}'
     state: "{{ unison_service_auto_start | ternary('started', 'stopped') }}"
