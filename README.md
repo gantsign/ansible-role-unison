@@ -10,7 +10,13 @@ Role to install and configure the Unison file synchromizer for a Vagrant managed
 Requirements
 ------------
 
-* Ubuntu
+* Linux Distribution
+
+    * Debian Family
+
+        * Ubuntu
+
+            * Xenial (16.04)
 
 Role Variables
 --------------
