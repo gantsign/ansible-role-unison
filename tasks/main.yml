@@ -9,6 +9,7 @@
   become: yes
   apt_repository:
     repo: 'ppa:john-freeman/unison'
+    codename: '{{ ansible_distribution_release }}'
 
 - name: install unison
   become: yes
